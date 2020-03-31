@@ -2,10 +2,14 @@
 東高科学部が制作中のドローン船用プログラム。
 
 ## 各ファイルの役割
-base.py          ...測位から計算、各モーターの制御まで行うPythonプログラム。これを実行する。内部は1秒ごと無限ループされる。
-micropyGPS.py    ...GPSモジュールを利用するためのパッケージ。
-target.csv       ...ターゲット座標と許容誤差値がCSV形式で格納されています。
-number.txt       ...base.pyがtarget.csvから取り出すターゲット座標の行番号を指定します。
+base.py<br>
+測位から計算、各モーターの制御まで行うPythonプログラム。これを実行する。内部は1秒ごと無限ループされる。<br><br>
+micropyGPS.py<br>
+GPSモジュールを利用するためのパッケージ。<br><br>
+target.csv<br>
+ターゲット座標と許容誤差値がCSV形式で格納されています。<br><br>
+number.txt<br>
+base.pyがtarget.csvから取り出すターゲット座標の行番号を指定します。
 
 ## 準備
 
@@ -29,7 +33,7 @@ smbus/pigpio/pings/adafruit_ina260<br>
     reboot
     sudo nano /etc/NetworkManager/system-connections/rokemoba
     
-/etc/NetworkManager/system-connections/rokemoba に各内容は以下の通り
+/etc/NetworkManager/system-connections/rokemoba に記述する内容は以下の通り
 
         [connection]
         id=rokemoba
