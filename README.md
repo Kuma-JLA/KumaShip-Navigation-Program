@@ -1,4 +1,4 @@
-# Ship-Navigation
+# Navigation-Program
 東高科学部が制作中のドローン船用プログラム。
 
 ## 各ファイルの役割
