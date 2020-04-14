@@ -10,6 +10,8 @@ target.csv<br>
 ターゲット座標と許容誤差値がCSV形式で格納されています。<br><br>
 number.txt<br>
 base.pyがtarget.csvから取り出すターゲット座標の行番号を指定します。
+start.sh<br>
+各種プログラムを起動します。「自動起動の設定」に従って起動時にwvdial,pigpio,base.pyが実行されるようにします。必要に応じて内容を変更してください。
 
 ## 準備
 
@@ -73,9 +75,11 @@ smbus/pigpio/pings/adafruit_ina260<br>
     KERNEL=="ttyUSB*", ATTRS{../idVendor}=="1004", ATTRS{../idProduct}=="6366", ATTRS{bNumEndpoints}=="03", ATTRS{bInterfaceNumber}=="01", SYMLINK+="modem"
 
     
-## 起動毎に必要なコマンド
-Piが起動するたび、以下の操作が必要。自動化するのがおススメ。
+## 自動起動の設定
+Piが起動するたびにstart.shを実行するよう設定する。
 
-    sudo ifup rokemoba
-    sudo pigpiod
-    sudo 格納フォルダ/base.py
+    sudo nano /etc/rc.local
+    
+"exit 0"の前に以下の通り追記。
+
+    (clone先フォルダ)/KumaShip-Navigation-Program/start.sh
