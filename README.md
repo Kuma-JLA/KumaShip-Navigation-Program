@@ -17,8 +17,9 @@ base.pyがtarget.csvから取り出すターゲット座標の行番号を指定
 smbus/pigpio/pings/adafruit_ina260<br>
 →以下のコマンドを打ち込んでください。<br>
 
-    sudo apt-get install python3-smbus
     sudo apt install pigpio
+    sudo apt-get install python3-smbus
+    sudo apt-get -y install python3-pip
     sudo pip3 install pings
     sudo pip3 install adafruit-circuitpython-ina260
     
