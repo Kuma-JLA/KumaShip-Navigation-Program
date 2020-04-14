@@ -20,6 +20,7 @@ smbus/pigpio/pings/adafruit_ina260<br>
     sudo apt install pigpio
     sudo apt-get install python3-smbus
     sudo apt-get -y install python3-pip
+    sudo pip3 install pigpio
     sudo pip3 install pings
     sudo pip3 install adafruit-circuitpython-ina260
     
