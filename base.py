@@ -74,7 +74,7 @@ while True:
 
 
 #ナンバー読み取り
-        with open('./number.txt',encoding='utf-8') as f:
+        with open('(clone先フォルダ)/KumaShip-Navigation-Program/number.txt',encoding='utf-8') as f:
             number=f.readline() # 改行も含めて１行読込
             number=number.rstrip() # 右側の改行文字を削除
 
@@ -82,7 +82,7 @@ while True:
 
 
 #目標座標読み取り
-        with open('./target.csv') as f:
+        with open('(clone先フォルダ)/KumaShip-Navigation-Program/target.csv') as f:
             reader = csv.reader(f)
             l = [row for row in reader]
             targetlat = (l[int(number)][0])
