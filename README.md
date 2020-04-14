@@ -26,39 +26,33 @@ smbus/pigpio/pings/adafruit_ina260<br>
 利用にあたり、L-03F＋ロケットモバイルによるモバイル回線を利用している。
 開発するうえではWi-FiやEthernetでも問題ない。システムを完全に再現するには以下の通り。
 
-    sudo apt-get install -y network-manager network-manager-gnome
-    sudo apt-get remove -y dhcpcd5
+    sudo apt-get install wvdial
+    sudo modprobe usbserial vendor=0x1004 product=0x6366
     sudo  nano /etc/network/interfaces
-    #全行コメントアウト
-    reboot
-    sudo nano /etc/NetworkManager/system-connections/rokemoba
+    sudo nano /etc/wvdial.conf
     
-/etc/NetworkManager/system-connections/rokemoba に記述する内容は以下の通り
+/etc/wvdial.conf に記述する内容は以下の通り
+    
+    [Dialer Defaults]
+    Phone = *99***1#
+    APN = 4gn.jp
+    Username = roke@moba
+    Password = rokemoba
+    New PPPD = yes
+    Stupid Mode = yes
+    Init1 = ATZ
+    Init2 = AT+CGDCONT=1,"IP","4gn.jp"
+    Init3 = ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0
+    Dial Attemps = 3
+    Modem Type = Analog Modem
+    Modem = /dev/ttyUSB1
+    Dial Command = ATD
+    Baud = 460800
+    ISDN = 0
+    Carrier Check = no
+    Auto DNS = 1
+    Check Def Route = 1
 
-        [connection]
-        id=rokemoba
-        type=gsm
-        autoconnect=true
-
-        [ppp]
-        refuse-eap=true
-        refuse-mschap=true
-        refuse-mschapv2=true
-
-        [ipv6]
-        method=auto
-        
-        [ipv4]
-        method=auto
-        
-        [serial]
-        baud=460800
-        
-        [gsm]
-        number=*99***1#
-        username=roke@moba
-        password=rokemoba
-        apn=4gn.jp
     
 ## 起動毎に必要なコマンド
 Piが起動するたび、以下の操作が必要。自動化するのがおススメ。
