@@ -5,4 +5,4 @@ sudo ifup rokemoba
 sudo pigpiod
 #GPS測位までさらに20秒待機します
 sleep 20
-sudo python3 ./base.py
+sudo python3 (clone先フォルダ)/KumaShip-Navigation-Program/base.py
