@@ -31,10 +31,22 @@ smbus/pigpio/pings/adafruit_ina260<br>
 ### base.pyの内容に編集が必要。<br>
 下記2行について、clone先フォルダを絶対パスで指定すること。
 
+    sudo nano (clone先フォルダ)/KumaShip-Navigation-Program/base.py
+    
     #77行目
     with open('(clone先フォルダ)/KumaShip-Navigation-Program/number.txt',encoding='utf-8') as f:
     #85行目
     with open('(clone先フォルダ)/KumaShip-Navigation-Program/target.csv') as f:
+    
+    
+### start.shの内容に編集が必要。<br>
+下記について、clone先フォルダを絶対パスで指定すること。
+
+    sudo nano (clone先フォルダ)/KumaShip-Navigation-Program/start.sh
+    
+    #8行目
+    sudo python3 (clone先フォルダ)/KumaShip-Navigation-Program/base.py
+    
     
 ### adafruit_ina260モジュールの内容に編集が必要。<br>
 
