@@ -30,6 +30,9 @@ smbus/pigpio/pings/adafruit_ina260<br>
     sudo modprobe usbserial vendor=0x1004 product=0x6366
     sudo  nano /etc/network/interfaces
     sudo nano /etc/wvdial.conf
+    #内容は下を参照のこと
+    sudo nano /etc/udev/rules.d/99-ltemodem.rules
+    #内容は下を参照のこと
     
 /etc/wvdial.conf に記述する内容は以下の通り
     
@@ -52,10 +55,16 @@ smbus/pigpio/pings/adafruit_ina260<br>
     Carrier Check = no
     Auto DNS = 1
     Check Def Route = 1
+    
+/etc/udev/rules.d/99-ltemodem.rules に記述する内容は以下の通り
+
+    ATTRS{idVendor}=="1004", ATTRS{idProduct}=="6366", RUN+="/sbin/modprobe usbserial vendor=0x1004 product=0x6366"
+    KERNEL=="ttyUSB*", ATTRS{../idVendor}=="1004", ATTRS{../idProduct}=="6366", ATTRS{bNumEndpoints}=="03", ATTRS{bInterfaceNumber}=="01", SYMLINK+="modem"
 
     
 ## 起動毎に必要なコマンド
 Piが起動するたび、以下の操作が必要。自動化するのがおススメ。
 
+    sudo ifup rokemoba
     sudo pigpiod
     sudo 格納フォルダ/base.py
