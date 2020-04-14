@@ -25,6 +25,7 @@ smbus/pigpio/pings/adafruit_ina260<br>
 ### モバイル回線のセットアップ
 利用にあたり、L-03F＋ロケットモバイルによるモバイル回線を利用している。
 開発するうえではWi-FiやEthernetでも問題ない。システムを完全に再現するには以下の通り。
+(参考記事: https://qiita.com/jiisenonba/items/5f4ecbb58d80f4a69cdc )
 
     sudo apt-get install wvdial
     sudo modprobe usbserial vendor=0x1004 product=0x6366
