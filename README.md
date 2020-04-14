@@ -24,6 +24,14 @@ smbus/pigpio/pings/adafruit_ina260<br>
     sudo pip3 install pings
     sudo pip3 install adafruit-circuitpython-ina260
     
+### adafruit_ina260モジュールの内容に編集が必要。<br>
+    sudo nano /usr/local/lib/python3.7/dist-packages/adafruit_ina260.py
+    
+    #INA260モジュールのI2Cアドレスを指定する。
+    def __init__(self, i2c_bus, address=0x40):   
+    ↓
+    def __init__(self, i2c_bus, address=0x6d):  
+    
 ### モバイル回線のセットアップ
 利用にあたり、L-03F＋ロケットモバイルによるモバイル回線を利用している。
 開発するうえではWi-FiやEthernetでも問題ない。システムを完全に再現するには以下の通り。
