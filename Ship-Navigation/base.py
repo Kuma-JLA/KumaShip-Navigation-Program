@@ -15,7 +15,7 @@ import adafruit_ina260
 
 #電圧電流センサセット
 i2cine = board.I2C()
-ina260 = adafruit_ina260.INA260(i2cine, address=6d)
+ina260 = adafruit_ina260.INA260(i2cine)
 
 
 #ECSリセット
