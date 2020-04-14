@@ -27,7 +27,17 @@ smbus/pigpio/pings/adafruit_ina260<br>
     sudo pip3 install pings
     sudo pip3 install adafruit-circuitpython-ina260
     
+    
+### base.pyの内容に編集が必要。<br>
+下記2行について、clone先フォルダを絶対パスで指定すること。
+
+    #77行目
+    with open('(clone先フォルダ)/KumaShip-Navigation-Program/number.txt',encoding='utf-8') as f:
+    #85行目
+    with open('(clone先フォルダ)/KumaShip-Navigation-Program/target.csv') as f:
+    
 ### adafruit_ina260モジュールの内容に編集が必要。<br>
+
     sudo nano /usr/local/lib/python3.7/dist-packages/adafruit_ina260.py
     
     #INA260モジュールのI2Cアドレスを指定する。
@@ -81,6 +91,6 @@ Piが起動するたびにstart.shを実行するよう設定する。
 
     sudo nano /etc/rc.local
     
-"exit 0"の前に以下の通り追記。
+"exit 0"の前に以下の通り追記。clone先フォルダは絶対パスで指定する。
 
     (clone先フォルダ)/KumaShip-Navigation-Program/start.sh
