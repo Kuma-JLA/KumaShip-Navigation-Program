@@ -9,9 +9,10 @@ GPSモジュールを利用するためのパッケージ。<br><br>
 target.csv<br>
 ターゲット座標と許容誤差値がCSV形式で格納されています。<br><br>
 number.txt<br>
-base.pyがtarget.csvから取り出すターゲット座標の行番号を指定します。
+base.pyがtarget.csvから取り出すターゲット座標の行番号を指定します。<br><br>
 start.sh<br>
-各種プログラムを起動します。「自動起動の設定」に従って起動時にwvdial,pigpio,base.pyが実行されるようにします。必要に応じて内容を変更してください。
+各種プログラムを起動します。「自動起動の設定」に従って起動時にwvdial,pigpio,base.pyが実行されるようにします。<br>
+必要に応じて内容を変更してください。<br><br>
 
 ## 準備
 
