@@ -1,9 +1,9 @@
 # Navigation-Program
 東高科学部が制作中のドローン船用プログラム。<br>
 利用する機材は以下のページを参照。<br>
-https://elchika.com/article/4e090ab9-2014-4ae3-a375-c264532f4a75/
+https://elchika.com/article/4e090ab9-2014-4ae3-a375-c264532f4a75/<br>
 
-<br>## 各ファイルの役割
+## 各ファイルの役割
 base.py<br>
 測位から計算、各モーターの制御まで行うPythonプログラム。これを実行する。内部は1秒ごと無限ループされる。<br><br>
 micropyGPS.py<br>
