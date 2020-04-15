@@ -192,8 +192,8 @@ while True:
         #低電圧でない場合
         else:
             
-            #距離500m以上
-            if (500<round(result['distance'])):
+            #距離200m以上
+            if (200<round(result['distance'])):
                 ecs = 1550
                 pingres = 'none'
                 if (-345 < x <= -180):
@@ -208,7 +208,7 @@ while True:
                     servo = 1500
         
             #距離threshold~200m
-            elif (200<round(result['distance'])<threshold):
+            elif (200<round(result['distance'])<['threshold']):
                 ecs = 1550
                 pingres = 'none'
                 if (-350 < x <= -180):
@@ -237,7 +237,7 @@ while True:
                     pingres = 'OK'
                     #目標を1進める
                     writenumber = (int(number)+1)
-                    with open('/home/pi/Ship/number.txt', mode="w", encoding='utf-8') as f:
+                    with open('(clone先フォルダ)/KumaShip-Navigation-Program/number.txt', mode="w", encoding='utf-8') as f:
                         f.write(str(writenumber))
             
                 # 接続NG
@@ -245,7 +245,7 @@ while True:
                     pingres = 'NG'
                     #目標を1戻す
                     writenumber = (int(number)-1)
-                    with open('/home/pi/Ship/number.txt', mode="w", encoding='utf-8') as f:
+                    with open('(clone先フォルダ)/KumaShip-Navigation-Program/number.txt', mode="w", encoding='utf-8') as f:
                         f.write(str(writenumber))
             
 
