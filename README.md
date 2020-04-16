@@ -82,7 +82,8 @@ smbus/pigpio/pings/adafruit_ina260<br>
 
     iface rokemoba inet wvdial
     
-/etc/wvdial.conf に記述する内容は以下の通り
+/etc/wvdial.conf に記述する内容は以下の通り<br>
+あらかじめ記述されている内容はすべて削除する。
     
     [Dialer Defaults]
     Phone = *99***1#
