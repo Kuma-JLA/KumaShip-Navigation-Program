@@ -71,10 +71,16 @@ smbus/pigpio/pings/adafruit_ina260<br>
     sudo apt-get install wvdial
     sudo modprobe usbserial vendor=0x1004 product=0x6366
     sudo  nano /etc/network/interfaces
+    #内容は下を参照のこと
     sudo nano /etc/wvdial.conf
     #内容は下を参照のこと
     sudo nano /etc/udev/rules.d/99-ltemodem.rules
     #内容は下を参照のこと
+    
+    
+/etc/network/interfaces に記述する内容は以下の通り
+
+    iface rokemoba inet wvdial
     
 /etc/wvdial.conf に記述する内容は以下の通り
     
