@@ -118,4 +118,4 @@ Piが起動するたびにstart.shを実行するよう設定する。
     
 "exit 0"の前に以下の通り追記。clone先フォルダは絶対パスで指定する。
 
-    (clone先フォルダ)/KumaShip-Navigation-Program/start.sh
+    sudo bash (clone先フォルダ)/KumaShip-Navigation-Program/start.sh
