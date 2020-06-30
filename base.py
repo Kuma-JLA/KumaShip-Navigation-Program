@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import csv
 import pprint
 import serial
@@ -13,6 +15,9 @@ import board
 import adafruit_ina260
 
 
+#各種設定
+locationpath = '/*****/KumaShip-Navigation-Program'         #clone場所絶対パス('/KumaShip-Navigation-Program'まで入力)
+
 #電圧電流センサセット
 i2cine = board.I2C()
 ina260 = adafruit_ina260.INA260(i2cine)
@@ -23,7 +28,6 @@ pi0 =pigpio.pi()
 pi0.set_servo_pulsewidth(19, 1500)
 time.sleep(5)
 pi0.stop()
-
 
 
 #GPS測位
@@ -46,12 +50,16 @@ gpsthread.start() # スレッドを起動
 
 while True:
     if gps.clean_sentences > 20: # ちゃんとしたデーターがある程度たまったら出力する
+        date=(gps.date_string('custom'))
         h = (gps.timestamp[0] if gps.timestamp[0] < 24 else gps.timestamp[0] - 24)
         nowtime=('%2d:%02d:%04.1f' % (h, gps.timestamp[1], gps.timestamp[2]))
         nowlat=('%2.8f' % (gps.latitude[0]))
         nowlon=('%2.8f' % (gps.longitude[0]))
         nowalt=('%f' % gps.altitude)
-
+        gpshead=(gps.course)
+        speedkm=(gps.speed[2])
+        speedkn=(gps.speed[0])
+        
 
 
 #CMPS12取得
@@ -74,7 +82,7 @@ while True:
 
 
 #ナンバー読み取り
-        with open('(clone先フォルダ)/KumaShip-Navigation-Program/number.txt',encoding='utf-8') as f:
+        with open(locationpath + '/number.txt',encoding='utf-8') as f:
             number=f.readline() # 改行も含めて１行読込
             number=number.rstrip() # 右側の改行文字を削除
 
@@ -82,7 +90,7 @@ while True:
 
 
 #目標座標読み取り
-        with open('(clone先フォルダ)/KumaShip-Navigation-Program/target.csv') as f:
+        with open(locationpath + '/target.csv') as f:
             reader = csv.reader(f)
             l = [row for row in reader]
             targetlat = (l[int(number)][0])
@@ -146,9 +154,9 @@ while True:
                 cos2α = 1 - sinα ** 2
                 cos2σm = cosσ - 2 * sinU1 * sinU2 / cos2α
                 C = ƒ / 16 * cos2α * (4 + ƒ * (4 - 3 * cos2α))
-                λʹ = λ
+                λ = λ
                 λ = L + (1 - C) * ƒ * sinα * (σ + C * sinσ * (cos2σm + C * cosσ * (-1 + 2 * cos2σm ** 2)))
-                if abs(λ - λʹ) <= 1e-12:
+                if abs(λ - λ) <= 1e-12:
                     break
             else:
                 return None
@@ -163,8 +171,8 @@ while True:
                 α1 = α1 + pi * 2
             return {
                 'distance': s,           # 距離
-                'azimuth1': degrees(α1), # 方位角(始点→終点)
-                'azimuth2': degrees(α2), # 方位角(終点→始点)
+                'azimuth1': degrees(α1), # 方位角(始点終点)
+                'azimuth2': degrees(α2), # 方位角(終点始点)
             }
                             
         lat1 = float(nowlat)
@@ -179,12 +187,13 @@ while True:
 
 
 
-#各種判定        
+#各種判定
+        
         #方位判定
         x = (round(result['azimuth1'],1) - head)
         
         #低電圧の場合
-        if (13 > V):
+        if (11.5 > V):
             ecs = 1500
             servo = 1500
             pingres = 'none'
@@ -193,8 +202,8 @@ while True:
         else:
             
             #距離200m以上
-            if (200<round(result['distance'])):
-                ecs = 1550
+            if (200<=round(result['distance'])):
+                ecs = 1600
                 pingres = 'none'
                 if (-345 < x <= -180):
                     servo = 1000
@@ -209,7 +218,7 @@ while True:
         
             #距離threshold~200m
             elif (200<round(result['distance'])<['threshold']):
-                ecs = 1550
+                ecs = 1600
                 pingres = 'none'
                 if (-350 < x <= -180):
                     servo = 1000
@@ -237,7 +246,7 @@ while True:
                     pingres = 'OK'
                     #目標を1進める
                     writenumber = (int(number)+1)
-                    with open('(clone先フォルダ)/KumaShip-Navigation-Program/number.txt', mode="w", encoding='utf-8') as f:
+                    with open(locationpath + '/number.txt', mode="w", encoding='utf-8') as f:
                         f.write(str(writenumber))
             
                 # 接続NG
@@ -245,12 +254,13 @@ while True:
                     pingres = 'NG'
                     #目標を1戻す
                     writenumber = (int(number)-1)
-                    with open('(clone先フォルダ)/KumaShip-Navigation-Program/number.txt', mode="w", encoding='utf-8') as f:
+                    with open(locationpath + '/number.txt', mode="w", encoding='utf-8') as f:
                         f.write(str(writenumber))
-            
 
-
-
+#測定値CSV書き出し
+        with open('/dev/shm/data.csv', 'w') as f:
+            writer = csv.writer(f)
+            writer.writerow([(str(date) + ' ' + str(nowtime)), nowlat, nowlon, nowalt, head, gpshead, round(result['azimuth1'],1), round(result['distance']), speedkm, speedkn, number, V, A, W])
 
             
 #舵制御
@@ -266,7 +276,8 @@ while True:
 
         print()
         print()
-        print('time:',nowtime)
+        print(str(date) + ' ' + str(nowtime))
+        #print('time:',nowtime)
         print('number:',number)
         print('tarlat:',targetlat)
         print('tarlon:',targetlon)
@@ -274,8 +285,11 @@ while True:
         print('nowlon:',nowlon)
         print('nowalt:',nowalt)
         print('nowhead:',head)
-        print('方位角(始点→終点)：%s' % round(result['azimuth1'],1))
-#        print('方位角(終点→始点)：%s' % result['azimuth2'])
+        print('gpshead:',gpshead)
+        print('speed:',speedkm,'km/h')
+        print('speed:',speedkn,'knot')
+        print('方位角(始点終点)：%s' % round(result['azimuth1'],1))
+        #print('方位角(終点始点)：%s' % result['azimuth2'])
         print('距離：%s(m)' % round(result['distance']))
         print(servo)
         print(ecs)
@@ -285,3 +299,4 @@ while True:
         print('%.2f' % (W), "W")
 
     time.sleep(1)
+
