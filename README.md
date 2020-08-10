@@ -28,6 +28,8 @@ smbus/pigpio/pings/adafruit_ina260<br>
     sudo pip3 install pigpio
     sudo pip3 install pings
     sudo pip3 install adafruit-circuitpython-ina260
+    sudo pip3 install paramiko
+    sudo pip3 install scp
     
     
 ### base.pyの内容に編集が必要。<br>
