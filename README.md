@@ -22,15 +22,8 @@ wvdial,pigpio,base.pyを起動します。「自動起動の設定」に従っ�
 smbus/pigpio/pings/adafruit_ina260<br>
 →以下のコマンドを打ち込んでください。<br>
 
-    sudo apt install pigpio
-    sudo apt-get install python3-smbus
-    sudo apt-get -y install python3-pip
-    sudo pip3 install pigpio
-    sudo pip3 install pings
-    sudo pip3 install adafruit-circuitpython-ina260
-    sudo pip3 install paramiko
-    sudo pip3 install scp
-    pip3 install urllib3
+    sudo apt install pigpio python3-pip
+    sudo pip3 install pigpio pings adafruit-circuitpython-ina260 urllib3 smbus2
     
     
 ### base.pyの内容に編集が必要。<br>
