@@ -7,7 +7,7 @@ import micropyGPS
 import threading
 import time
 from math import *
-import smbus
+import smbus2
 import sys 
 import pigpio
 import pings
