@@ -63,7 +63,7 @@ while True:
 
 
 #CMPS12取得
-        i2ccmps = smbus.SMBus(1)
+        i2ccmps = smbus2.SMBus(1)
         address = 0x60
         rawheadHighByte = i2ccmps.read_byte_data(address,0x02)
         rawheadLowByte = i2ccmps.read_byte_data(address,0x03)
