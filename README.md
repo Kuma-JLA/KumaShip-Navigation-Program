@@ -59,7 +59,7 @@ smbus/pigpio/pings/adafruit_ina260<br>
     
 ### adafruit_ina260モジュールの内容に編集が必要。<br>
 
-    sudo nano /usr/local/lib/python3.7/dist-packages/adafruit_ina260.py
+    sudo nano /usr/local/lib/python3.7/site-packages/adafruit_ina260.py
     
     #INA260モジュールのI2Cアドレスを指定する。
     def __init__(self, i2c_bus, address=0x40):   
