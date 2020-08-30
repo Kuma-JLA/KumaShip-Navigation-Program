@@ -9,6 +9,9 @@ import sys
 import pings
 import board
 
+#各種設定
+locationpath = '/*****/KumaShip-Navigation-Program'         #clone場所絶対パス('/KumaShip-Navigation-Program'まで入力)
+
 while True:
 
 #センサーデータ読み取り
@@ -181,7 +184,9 @@ while True:
                     pingres = 'OK'
                     #目標を1進める
                     writenumber = (int(number)+1)
-                    with open('/home/pi/Ship/number.txt', mode="w", encoding='utf-8') as f:
+                    with open('/dev/shm/number.txt', mode="w", encoding='utf-8') as f:
+                        f.write(str(writenumber))
+                    with open(locationpath + '/number.txt', mode="w", encoding='utf-8') as f:
                         f.write(str(writenumber))
             
                 # 接続NG
@@ -189,7 +194,9 @@ while True:
                     pingres = 'NG'
                     #目標を1戻す
                     writenumber = (int(number)-1)
-                    with open('/home/pi/Ship/number.txt', mode="w", encoding='utf-8') as f:
+                    with open(locationpath + '/number.txt', mode="w", encoding='utf-8') as f:
+                        f.write(str(writenumber))
+                    with open('/dev/shm/number.txt', mode="w", encoding='utf-8') as f:
                         f.write(str(writenumber))
 
 #測定値CSV書き出し
