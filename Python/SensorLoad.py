@@ -1,3 +1,5 @@
+# coding: UTF-8
+
 import csv
 import pprint
 import serial
@@ -8,7 +10,6 @@ from math import *
 import smbus
 import sys 
 import pigpio
-import pings
 import board
 import adafruit_ina260
 
