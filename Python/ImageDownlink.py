@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#参考: https://qiita.com/hasekou_tech/items/acd0d9159a9001ebfbd3
+
 import datetime
 import cv2
 
@@ -16,4 +19,4 @@ camera.release()
 #日時合成
 cv2.putText(frame,nowtime_string,(25,50),cv2.FONT_HERSHEY_SIMPLEX, 1.5,(232, 167, 145), 10)
 cv2.putText(frame,nowtime_string,(25,50),cv2.FONT_HERSHEY_SIMPLEX, 1.5,(70, 158, 162), 2)
-cv2.imwrite("/dev/shm/oi_newimage.jpg", frame)
+cv2.imwrite("/dev/shm/kuma_newimage.jpg", frame)
