@@ -1,5 +1,5 @@
 # Navigation-Program
-東高科学部が制作中のドローン船用プログラム。<br>
+制作中のAOV用プログラム。<br>
 利用する機材は以下のページを参照。<br>
 https://elchika.com/article/4e090ab9-2014-4ae3-a375-c264532f4a75/<br>
 
